@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import React from 'react'
 import * as yup from 'yup'
-import { http } from '../../axios'
+import {db} from '../../firebase'
 
 
 function TitleForm({Reload}) {
@@ -11,17 +11,25 @@ function TitleForm({Reload}) {
         type:""
     }
     const submit=(values,props)=>{
-        console.log(values)
-        http.post("title",values)
-        .then(res=>{
-            console.log("Response",res.data)
-            Reload(res.data)
-            props.resetForm()
-            
+        console.log("submit")
+        const {title,type} = values
+        const data = {            
+            title,
+            type,
+            debit:0,
+            credit:0,
+            available:0,
+            date:Date.now()
+        }
+        console.log("data",data)
+
+        db.collection("title").add(data)
+        .then(function() {
+            console.log("Document successfully written!");
         })
-        .catch(err=>{
-            console.log("Error",err)
-        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });        
     }
     const validationSchema = yup.object({
         title:yup.string().required("Enter Title"),
@@ -51,11 +59,12 @@ function TitleForm({Reload}) {
                         <ErrorMessage name="type" />
                     </div>
                     <div className="w3-center m-2">
-                        <button type="submit" className="btn btn-success mb-3" data-dismiss="modal">Submit</button>
+                        <button type="submit" className="btn btn-success mb-3" >Submit</button>
                     </div>    
                     
                 </Form>
             </Formik>
+
         </div>
     )
 }

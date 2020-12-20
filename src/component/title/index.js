@@ -7,11 +7,8 @@ import ViewTitle from './ViewTitle'
 
 function Title() {
 
-    const [reload,setReload] = useState()
-    const [stats,setStats] = useState({})
-    const Reload = (data)=>{
-        setReload(data)
-    }
+    const [stats,setStats] = useState([])
+    
     const TitleStats=(data)=>{
         setStats(data)
     }
@@ -19,8 +16,8 @@ function Title() {
         <div>
             <Head />
             <Stats stats={stats} />
-            <New target="#titleform" Reload={Reload} />
-            <ViewTitle reload={reload} TitleStats={TitleStats} />
+            <New target="#titleform" />
+            <ViewTitle TitleStats={TitleStats} />
         </div>
     )
 }
