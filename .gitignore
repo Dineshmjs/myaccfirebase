@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-# /node
+/node
 .firebaserc
 .firebase.json
 .firebase
@@ -26,4 +26,5 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+node/index.js
 node/index.js
