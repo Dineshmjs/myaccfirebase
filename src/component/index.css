@@ -21,3 +21,14 @@
     padding-top: 5px;
     color: gray;
 }
+
+#tmodify{
+    display: flex;
+    align-items: center;
+}
+#tmodify > p{    
+    cursor: pointer;
+}
+.tmodifyicon{
+    font-size: 5px;
+}
